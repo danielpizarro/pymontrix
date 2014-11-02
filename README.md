@@ -1,8 +1,8 @@
-#pymontrix
+#Pymontrix
 
 Matrix operations library using compressed matrices based in Mondrian tesselation
 
-##finding the max value in a matrix of 1.000.000 x 1.000.000
+##Find the max value in a matrix of 1.000.000 x 1.000.000 items
 
 ```
 >>> from montrix import Zone, Montrix
