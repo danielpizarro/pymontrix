@@ -1,4 +1,4 @@
 pymontrix
 =========
 
-Matrix operations library using compressed matrix based in Mondrian tesselation
+Matrix operations library using compressed matrices based in Mondrian tesselation
