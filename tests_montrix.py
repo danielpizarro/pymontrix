@@ -181,4 +181,43 @@ def test_montrix_003():
     
     assert_equals(max_value,2)
     assert_equals(max_coords, (7,7))
+
+
+def test_montrix_004():
+    a = Montrix(1E6,1E6,0)
+    a.set_zone(Zone(3,3,5,5,1))
+    a.set_zone(Zone(7,7,9,9,2))
+    a.set_zone(Zone(1000,1000,2000,2000,3))
+
+    max_value, max_coords = a.get_max()
+    
+    assert_equals(max_value,3)
+    assert_equals(max_coords, (1000,1000))
+    
+def test_montrix_005():
+    a = Montrix(1E6,1E6,0)
+    b = Montrix(1E6,1E6,0)
+
+    a.set_zone(Zone(1000,1000,20000,20000,-1))
+    b.set_zone(Zone(800000,800000,900000,900000,2))
+
+    min_a = a.get_min()
+    max_b = b.get_max()
+    
+    assert_equals(min_a, (-1, (1000, 1000)))
+    assert_equals(max_b, (2, (800000, 800000)))
+    
+    def largest_abs(x,y):
+        if abs(x)>abs(y): return x
+        else: return y
+    
+    
+    a.apply(b,largest_abs)
+    
+    min_a = a.get_min()
+    max_a = a.get_max()
+
+    assert_equals(min_a, (-1, (1000, 1000)))
+    assert_equals(max_a, (2, (800000, 800000)))
+
     

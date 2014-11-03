@@ -246,6 +246,18 @@ class Montrix:
         
         return max_value, (max_zone.row0,max_zone.col0)
 
+    def get_min(self):
+        if self.zones==[]: return None, None
+        min_zone=self.zones[0]
+        min_value=min_zone.value
+
+        for z in self.zones[1:]:
+            if z.value<min_value:
+                min_zone=z
+                min_value=min_zone.value
+        
+        return min_value, (min_zone.row0,min_zone.col0)
+
     def set_zone(self, zone):
         self.apply_zone(zone,lambda x,y:y)
     
@@ -257,7 +269,7 @@ class Montrix:
                 aux+=z.fragment_and_apply(zone, layout=None, fn=fn)
         self.zones=aux
 
-    def select_intersecting_zones(mzones): #untested
+    def select_intersecting_zones(self, mzones):
     #TODO: this could be very fast using indexing of zones
     #recommended: use a SegmentTree: http://liangsun.org/posts/a-python-implementation-of-segment-tree/
     
@@ -267,7 +279,7 @@ class Montrix:
                 if z.intersects(mz): aux.append(mz)
         return aux
 
-    def apply(self, montrix, fn): #untested
+    def apply(self, montrix, fn):
         for mz in self.select_intersecting_zones(montrix.zones):
             self.apply_zone(mz,fn)
 
